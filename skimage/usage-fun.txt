@@ -1,0 +1,61 @@
+Images are data. In the context of using and developing scikit-image, you
+expect that we consider non-trivial images and that process them in order to
+derive meaning (and scientific results). Well, we do so, as showcased in the
+previous subsections. But we also like to play with images, just for fun and/or
+to create something appealing to the eye. The examples below will give you an
+idea of the fun you can have with scikit-image!
+
+Swirl transformation
+--------------------
+
+[Mona Lisa example]
+
+Embedded Face Detection
+-----------------------
+
+[Juan?]
+
+Interactivity within IPython Notebook
+-------------------------------------
+
+[Brian E. Granger's example with the coffee cup]
+
+Instagram-like effects
+----------------------
+
+In just a few lines of code, you can alter a picture with your very own
+effects. You can combine filters, transforms, and feature detection, varying
+parameters at will.
+
+The example below is a hack for getting the negative of a JPG picture. Adding
+an empty image (of different type) and thresholding unexpectedly yielded
+something 'interesting'.
+
+.. code-block:: python
+   
+   from skimage import color
+   import numpy as np
+   import matplotlib.pyplot as plt
+   
+   # [Edit!]
+   fabio = plt.imread('/home/marianne/Downloads/fabio.jpg')
+   
+   empty_image = np.zeros((501, 496))
+   empty_image = color.gray2rgb(empty_image)
+   
+   fabio2 = fabio + empty_image
+   white_mask = color.rgb2gray(fabio2) < 10.
+   fabio2[white_mask] = 257.
+   
+   plt.subplot(121)
+   plt.imshow(fabio, origin='lower')
+   plt.subplot(122)
+   plt.imshow(fabio2, origin='lower')
+   plt.savefig('fabio_fun.png')
+   from skimage import color
+
+.. figure:: fabio_fun.png
+   :align: center
+
+   Before and after a fairly random operation. :label:`egfab`
+
